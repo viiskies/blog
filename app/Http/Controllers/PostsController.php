@@ -98,7 +98,7 @@ class PostsController extends Controller
         if (Auth::user()->id != $post->user->id) {
             return redirect()->action('UsersController@index');
         }
-//        dd('dsada');
+
         $post = Post::destroy( $id );
         return redirect()->action('PostsController@index');
     }
