@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <form role="form" method="POST" action="{{ route( 'users.update', [ 'id' => $user->id ] ) }}">
                             @csrf
-
+                            {{ method_field('PATCH') }}
                             <div class="form-group row">
                                 <label class="col-lg-4 col-form-label text-lg-right">Name</label>
 
@@ -21,11 +21,6 @@
                                             value="{{ $user->name }}"
                                             required
                                     >
-                                    @if ($errors->has('name'))
-                                        <div class="invalid-feedback">
-                                            <strong>{{ $errors->first('name') }}</strong>
-                                        </div>
-                                    @endif
                                 </div>
                             </div>
 
@@ -40,12 +35,6 @@
                                             value="{{ old('email', $user->email) }}"
                                             required
                                     >
-
-                                    @if ($errors->has('email'))
-                                        <div class="invalid-feedback">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </div>
-                                    @endif
                                 </div>
                             </div>
 
@@ -59,11 +48,6 @@
                                             name="password"
                                             required
                                     >
-                                    @if ($errors->has('password'))
-                                        <div class="invalid-feedback">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </div>
-                                    @endif
                                 </div>
                             </div>
 
@@ -77,14 +61,17 @@
                                             name="password_confirmation"
                                             required
                                     >
-                                    @if ($errors->has('password_confirmation'))
-                                        <div class="invalid-feedback">
-                                            <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                        </div>
-                                    @endif
                                 </div>
                             </div>
-
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <div class="form-group row">
                                 <div class="col-lg-6 offset-lg-4">
                                     <button type="submit" class="btn btn-primary">

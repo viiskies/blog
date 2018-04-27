@@ -4,7 +4,7 @@
 
     @foreach($users as $user)
         <h2>
-            <a href="{{ route( 'users.single', [ 'id' => $user->id ] ) }}">
+            <a href="{{ route( 'users.show', [ 'id' => $user->id ] ) }}">
                 {{ $user->name }}
             </a>
         </h2>

@@ -12,21 +12,19 @@
                 <input type="text" name="title" class="form-control" id="title" placeholder="Title" value="{{ old('title') }}">
             </div>
 
-            @if ($errors->get('title'))
-                @foreach ($errors->get('title') as $error)
-                    <div class="alert alert-danger" role="alert">{{ $error }}</div>
-                @endforeach
-            @endif
-
             <div class="form-group">
                 <label for="title">Content</label>
                 <textarea type="text" name="content" class="form-control" id="content" placeholder="Blog content goes here...">{{ old('content') }}</textarea>
             </div>
 
-            @if ($errors->get('title'))
-                @foreach ($errors->get('title') as $error)
-                    <div class="alert alert-danger" role="alert">{{ $error }}</div>
-                @endforeach
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
             @endif
 
             <button type="submit" class="btn btn-secondary">Submit</button>

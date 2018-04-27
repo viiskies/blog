@@ -106,6 +106,10 @@ class UsersController extends Controller
         if (Auth::user()->id != $id) {
             return redirect()->action('UsersController@index');
         }
+        $user = User::findOrFail($id);
+        foreach ($user->posts as $post) {
+            $post->delete($post->id);
+        }
         $user = User::destroy( $id );
         return redirect()->action('UsersController@index');
     }

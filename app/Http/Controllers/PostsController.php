@@ -94,6 +94,11 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
+        $post = Post::findOrFail( $id );
+        if (Auth::user()->id != $post->user->id) {
+            return redirect()->action('UsersController@index');
+        }
+//        dd('dsada');
         $post = Post::destroy( $id );
         return redirect()->action('PostsController@index');
     }
